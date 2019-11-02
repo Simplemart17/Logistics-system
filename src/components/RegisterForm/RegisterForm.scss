@@ -1,0 +1,23 @@
+.registration-form {
+  padding: 10px 30px 20px 30px;
+
+  &__field {
+    margin-bottom: 30px;
+
+    :focus {
+      border: 2px solid #3359db;
+      outline: none;
+    }
+  }
+
+  &__text {
+    font-size: 13px;
+    color: #7d7d7d;
+
+    &--span {
+      margin-left: 10px;
+      color: #3359db;
+      cursor: pointer;
+    }
+  }
+}
