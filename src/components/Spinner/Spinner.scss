@@ -1,0 +1,36 @@
+.spinner {
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    margin-top: -66px;
+    margin-left: -30px;
+    box-sizing: border-box;
+    border-top: 3px solid #3359db;
+    border-right: 2px solid transparent;
+    border-radius: 50%;
+    content: '';
+    animation: spinner 1s ease infinite;
+  }
+
+  &.small::before {
+    width: 16px;
+    height: 16px;
+    margin-top: -8px;
+    margin-left: -8px;
+  }
+}
+
+.medium::before {
+  width: 25px;
+  height: 25px;
+  border-top: 3px solid #ffffff;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
