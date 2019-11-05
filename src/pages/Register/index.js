@@ -10,6 +10,9 @@ import applyValidation from '../../utils/applyValidation';
 
 
 const Register = props => {
+  /**
+   * Hooks to manage form state and also set form error state
+   */
   const [form, setForm] = useState({
     username: '',
     email: '',
@@ -63,17 +66,23 @@ const Register = props => {
     setForm(() => ({ ...form, [`${name}Error`]: '', [name]: value }));
   }
 
+  /**
+   * This method submits the form and call the login action
+   * @param {Event} e 
+   * @returns {void}
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { register, history } = props;
     const {  username, email, password, phone } = form;
     const payload = { username, email, password, phone };
     const errors = await validateInputFields();
-    
     const hasNoError = Object.values(errors).every(x => (x === true || x === ''));
+    
     if (!hasNoError) { return; }
+    
     await register(payload);
-    history.push('/profile');
+    history.push('/dashboard')
   }
 
   const {  usernameError, emailError, passwordError, phoneError } = form;
@@ -96,10 +105,13 @@ const Register = props => {
   )
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+  console.log(state, 'I dey!')
+  return ({
   registerState: state.auth.data,
   isLoading: state.auth.isLoading
-});
+})
+};
 
 const mapDispatchToProps = dispatch => ({
   register: payload => dispatch(registerAction(payload)),

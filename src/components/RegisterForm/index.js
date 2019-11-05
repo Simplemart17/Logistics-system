@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './RegisterForm.scss';
 import InputField from '../InputField/index';
 import Button from '../Button/index';
@@ -44,7 +45,9 @@ const RegisterForm = (props) => (
       showTextOnError={true}
     />
     <p className="registration-form__text">Already have an account?
-      <span className="registration-form__text--span">Log In</span>
+      <Link className="registration-form__text--span" to="/login">
+        <span>Log In</span>
+      </Link>
     </p>
     <Button 
       type="submit"
