@@ -49,13 +49,15 @@ const RegisterForm = (props) => (
         <span>Log In</span>
       </Link>
     </p>
-    <Button 
-      type="submit"
-      name="Register"
-      isActive
-      onClick={props.handleSubmit}
-      isLoading={props.isLoading}
-    />
+    <div className="registration-form__button">
+      <Button 
+        type="submit"
+        name="Register"
+        isActive
+        onClick={props.handleSubmit}
+        isLoading={props.isLoading}
+      />
+    </div>
   </div>
 );
 

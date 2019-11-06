@@ -1,4 +1,9 @@
-import { REGISTER_SUCCESS, REQUEST_ACTION, LOGIN_SUCCESS } from './actionTypes';
+import {
+  REGISTER_SUCCESS,
+  REQUEST_ACTION,
+  LOGIN_SUCCESS,
+  GET_USER_SUCCESS,
+ } from './actionTypes';
 import axios from '../../utils/http';
 import { setLocalStorage } from '../../utils/auth';
 
@@ -11,9 +16,14 @@ export const requestAction = () => ({
   type: REQUEST_ACTION,
 });
 
-export const LoginUser = login => ({
+export const loginUser = login => ({
   type: LOGIN_SUCCESS,
   payload: login,
+});
+
+export const GetUsers = profile => ({
+  type: GET_USER_SUCCESS,
+  payload: profile,
 })
 
 const setAxiosHeader = token => { axios.defaults.headers.common.Authorization = `Bearer ${token}`; };
@@ -36,7 +46,7 @@ export const loginAction = payload => async dispatch => {
   try {
     const { data } = await axios.post('/auth/local', payload);
     const { jwt, user } = data;
-    dispatch(registerUser(user));
+    dispatch(loginUser(user));
     setLocalStorage('token', jwt);
     setAxiosHeader(jwt);
   } catch (error) {
@@ -44,10 +54,20 @@ export const loginAction = payload => async dispatch => {
   }
 };
 
+export const getUserProfile = () => async dispatch => {
+  dispatch(requestAction());
+  try {
+    const { data } = await axios.get('/users/me');
+    dispatch(GetUsers(data));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const initialState = {
   data: {},
   isLoading: false
-}
+};
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
@@ -68,9 +88,15 @@ const reducer = (state = initialState, action) => {
         data: action.payload,
         isLoading: false
       };
+    case GET_USER_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        isLoading: false
+      };
       default:
         return state
   }
-}
+};
 
 export default reducer;

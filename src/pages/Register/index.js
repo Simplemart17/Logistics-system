@@ -82,7 +82,7 @@ const Register = props => {
     if (!hasNoError) { return; }
     
     await register(payload);
-    history.push('/dashboard')
+    history.push('/dashboard');
   }
 
   const {  usernameError, emailError, passwordError, phoneError } = form;
@@ -105,13 +105,10 @@ const Register = props => {
   )
 }
 
-const mapStateToProps = state => {
-  console.log(state, 'I dey!')
-  return ({
+const mapStateToProps = state => ({
   registerState: state.auth.data,
   isLoading: state.auth.isLoading
-})
-};
+});
 
 const mapDispatchToProps = dispatch => ({
   register: payload => dispatch(registerAction(payload)),

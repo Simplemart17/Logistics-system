@@ -8,7 +8,6 @@ const Button = (props) => {
     type,
     isActive,
     submit = false,
-    disabled,
     classes,
     ...rest
   } = props;
@@ -30,11 +29,19 @@ const Button = (props) => {
       );
     }
 
-    return (
-          <React.Fragment>
-            {props.name}
-          </React.Fragment>
-        )
+    if (props.icon) {
+      return (
+        <div className='button-with-icon'>
+          {props.icon && <img src={props.icon} alt='button' />} {props.name}
+        </div>
+      )
+    }
+      return (
+        <React.Fragment>
+          {props.name}
+        </React.Fragment>
+    )
+    
 
   };
 
@@ -42,14 +49,13 @@ const Button = (props) => {
     classes
       ? `${classNames} ${classes}`
       : `${classNames}`
-  } ${disabled ? 'disabled' : ''}`.trim();
+  }`
 
   return (
     <button
       { ...rest }
       type={submit ? 'submit' : 'button'}
       id={props.id}
-      disabled={disabled}
       className={classList}
       onClick={props.onClick}
     >

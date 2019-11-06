@@ -1,0 +1,26 @@
+.dashboard-container {
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  background-color: #f9fbff;
+}
+
+.address-wrapper {
+  padding: 20px 40px 0px 30px;
+
+  &__header {
+    color: #7f9af5;
+    border-bottom: 2px solid #4c00ff;
+    width: 85px;
+  }
+  
+  &__button {
+    width: 140px;
+    float: right;
+  }
+}
+
+.address-card {
+  margin-top: 100px;
+}
