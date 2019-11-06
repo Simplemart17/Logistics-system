@@ -21,6 +21,30 @@
   }
 }
 
-.address-card {
+.address-card-wrapper {
   margin-top: 100px;
+  padding: 10px;
+  h1 {
+    color: #7f9af5;
+  }
+}
+
+.address-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  
+  grid-column-gap: 10px;
+  grid-row-gap: 15px;
+  :hover {
+    opacity: 0.8;
+  }
+  
+  &__box {
+    border: 2px solid #f4f4f4;
+    border-radius: 6px;
+    box-shadow: 2px 3px;
+    padding-left: 10px;
+    cursor: pointer;
+    background: rgb(217, 224, 245);
+  }
 }

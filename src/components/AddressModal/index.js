@@ -25,8 +25,8 @@ const renderViewAddressDetails = () => (
  * @returns {jsx}
  */
 const renderEditAddress = (props) => (
-  <div className="address-modal__content">
-    <div className="address-modal__form-group">
+  <div className='address-modal__content'>
+    <div className='address-modal__form-group'>
       <InputField
         autoFocus
         placeholder="Enter Street"
@@ -37,9 +37,9 @@ const renderEditAddress = (props) => (
         className="input-box"
       />
     </div>
-    <div className="address-modal__input-group">
+    <div className='address-modal__input-group'>
       {inputGroup.map((data, index) => (
-        <div className="address-modal__form-field" key={index}>
+        <div className='address-modal__form-field' key={index}>
           <InputField
             autoFocus
             placeholder={data.placeholder}
@@ -52,9 +52,9 @@ const renderEditAddress = (props) => (
       )
       )}
     </div>
-    <div className="address-modal__input-group">
+    <div className='address-modal__input-group'>
       {inputList.map((data, index) => (
-        <div className="address-modal__form-field" key={index}>
+        <div className='address-modal__form-field' key={index}>
           <InputField
             autoFocus
             placeholder={data.placeholder}
@@ -80,13 +80,13 @@ const renderEditAddress = (props) => (
 const renderModalHeader = (modalAction) => () => {
   switch (modalAction) {
     case 'view':
-      return (<div className="address-modal__header">ADDRESS DETAILS</div>);
+      return (<div className='address-modal__header'>ADDRESS DETAILS</div>);
 
     case 'edit':
-      return (<div className="address-modal__header">EDIT ADDRESS</div>);
+      return (<div className='address-modal__header'>EDIT ADDRESS</div>);
 
     case 'create':
-      return (<div className="address-modal__header">CREATE ADDRESS</div>);
+      return (<div className='address-modal__header'>CREATE ADDRESS</div>);
   }
 };
 
@@ -95,13 +95,14 @@ const renderModalHeader = (modalAction) => () => {
  *
  * @param {string} modalAction
  * @param {Object} addressModalContent
+ * @param {Object} viewAddressdetails
  *
  * @returns {Function}
  */
 const renderModalContent =
-  (modalAction, addressModalContent) => () => {
+  (modalAction, viewAddressDetails, addressModalContent) => () => {
     if (modalAction === 'view') {
-      return renderViewAddressDetails();
+      return renderViewAddressDetails(viewAddressDetails);
     }
 
     return renderEditAddress(addressModalContent);
@@ -117,9 +118,9 @@ const renderModalContent =
  * @returns {Function}
  */
 const renderModalFooter = (modalAction, toggleModal, handleSubmit) => () => (
-  <div className="address-modal__footer">
+  <div className='address-modal__footer'>
     {modalAction === 'view' ? (
-      <div className="address-modal__footer__item">
+      <div className='address-modal__footer__item'>
         <Button
           name="CLOSE"
           type="button"
@@ -128,14 +129,14 @@ const renderModalFooter = (modalAction, toggleModal, handleSubmit) => () => (
       </div>
     ) : (
         <>
-          <div className="address-modal__footer__item">
+          <div className='address-modal__footer__item'>
             <Button
               name="CANCEL"
               type="button"
               onClick={toggleModal}
             />
           </div>
-          <div className="address-modal__footer__item">
+          <div className='address-modal__footer__item'>
             <Button
               name="SUBMIT"
               type="button"
@@ -149,7 +150,7 @@ const renderModalFooter = (modalAction, toggleModal, handleSubmit) => () => (
 );
 
 const AddressModal = (props) => {
-  const { modalAction, showModal, toggleModal, handleSubmit, handleChange, value } = props;
+  const { modalAction, showModal, toggleModal, handleSubmit, handleChange, value, viewAddressDetails } = props;
 
   const addressModalContent = {
     value,
@@ -159,7 +160,7 @@ const AddressModal = (props) => {
   return (
     <Modal
       showModal={showModal}
-      renderContent={renderModalContent(modalAction, addressModalContent)}
+      renderContent={renderModalContent(modalAction, viewAddressDetails, addressModalContent)}
       renderHeader={renderModalHeader(modalAction)}
       renderFooter={renderModalFooter(modalAction, toggleModal, handleSubmit)}
     />

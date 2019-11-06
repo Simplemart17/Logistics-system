@@ -15,7 +15,7 @@ const SideBar = props => (
     <div className='sidebar__menu'>
       <ul className='sidebar__menu--content'>
         <li>
-          <Link to='/addresses' className='sidebar__menu--link'>
+          <Link to='/dashboard' className='sidebar__menu--link'>
             <img src="https://res.cloudinary.com/dq7p8ff2f/image/upload/v1572969948/Assets/address-icon.png" alt="address" />
             Addresses
           </Link>
@@ -33,7 +33,7 @@ const SideBar = props => (
           </Link>
         </li>
         <li>
-          <Link to='/logout' className='sidebar__menu--link'>
+          <Link to='#' className='sidebar__menu--link' onClick={props.logOutUser}>
             <img src="https://res.cloudinary.com/dq7p8ff2f/image/upload/v1572970020/Assets/download-icon.png" alt="logout" />
             Log out
           </Link>

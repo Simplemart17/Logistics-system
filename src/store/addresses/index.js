@@ -34,9 +34,8 @@ export const deleteAddress = payload => ({
 export const getAddressAction = () => async dispatch => {
   dispatch(requestAction());
   try {
-    const { data } = await axios.post('/addresses');
-    console.log(data, 'checking...');
-    // dispatch(getAddress(data));
+    const { data } = await axios.get('/addresses');
+    dispatch(getAddress(data));
   } catch (error) {
     console.log(error.message);
   }
