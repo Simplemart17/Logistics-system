@@ -7,7 +7,7 @@ import { getAddressAction, createAddressAction } from '../../store/addresses/ind
 import Button from '../../components/Button/index';
 import AddressModal from '../../components/AddressModal/index';
 
-const Dashboard = ({ profile, userDetails, createAddress }) => {
+const Dashboard = ({ profile, userDetails, createAddress, getAddresses, addresses, history }) => {
   const [state, setState] = useState({
     addressModalAction: 'view',
     showAddressModal: false,
@@ -20,7 +20,8 @@ const Dashboard = ({ profile, userDetails, createAddress }) => {
 
   useEffect(() => {
     profile();
-  }, [profile]);
+    getAddresses();
+  }, [profile, getAddresses]);
 
  
   /**
@@ -70,8 +71,17 @@ const Dashboard = ({ profile, userDetails, createAddress }) => {
             onClick={toggleModal('showAddressModal create')}
           />
         </div>
-        <div className='address-card'>
-          <p>The new address</p>
+        <div className='address-card-wrapper'>
+          <h1>List of Addresses</h1>
+          <div className='address-card'>
+          {
+            addresses.map((address) => (
+              <div key={address.id} className='address-card__box' onClick={toggleModal('showAddressModal view')}>
+                <p>{address.city}</p>
+              </div>
+            ))
+          }
+          </div>
         </div>
       </div>
     )
@@ -90,18 +100,22 @@ const Dashboard = ({ profile, userDetails, createAddress }) => {
     
     await createAddress(payload);
     toggleModal('showAddressModal')()
-    console.log('successful')
+  }
+
+  const logOut = () => {
+    localStorage.removeItem('token');
+    history.push('/');
   }
 
   const renderAddressModal = () => {
     return(
-    <AddressModal
-      showModal={state.showAddressModal}
-      toggleModal={toggleModal('showAddressModal')}
-      modalAction={state.addressModalAction}
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-    />
+      <AddressModal
+        showModal={state.showAddressModal}
+        toggleModal={toggleModal('showAddressModal')}
+        modalAction={state.addressModalAction}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
     )
   }
 
@@ -110,6 +124,7 @@ const Dashboard = ({ profile, userDetails, createAddress }) => {
       <SideBar
         username={userDetails.username}
         email={userDetails.email}
+        logOutUser={() => logOut()}
       />
       {addressCard()}
       {renderAddressModal()}
@@ -125,7 +140,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   profile: () => dispatch(getUserProfile()),
   getAddresses: () => dispatch(getAddressAction()),
-  createAddress: payload => dispatch(createAddressAction(payload))
+  createAddress: payload => dispatch(createAddressAction(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
