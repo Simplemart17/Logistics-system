@@ -1,0 +1,58 @@
+.sidebar {
+  background: #f8f9fa;
+  height: 100vh;
+  font-size: 18px;
+  width: 90%;
+  overflow: hidden;
+  box-shadow: 1px 5px 16px 0 rgba(0, 0, 0, 0.19);
+
+  &__avatar {
+    margin: 0 auto;
+    width: 30%;
+    height: 10%;
+    border: 2px solid #3d63ca;
+    border-radius: 15px;
+    padding: 5px;
+    background: #f3f1f1;
+    margin-top: 25%;
+    margin-bottom: 10%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+    }
+  }
+
+  &__details {
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  &__menu {
+    margin-top: 50%;
+
+    &--content {
+      list-style: none;
+    }
+    &--link {
+      color: #5366a5;
+      text-decoration: none;
+      font-weight: 500;
+      line-height: 40px;
+
+      img {
+        width: 15px;
+        padding: 0px 20px 0px 0px;
+      }
+    }
+  }
+}
+
+.line {
+  position: absolute;
+  top: 32%;
+  width: 18%;
+  border: 0.5px solid rgba(212, 212, 212, 0.5);
+}
+

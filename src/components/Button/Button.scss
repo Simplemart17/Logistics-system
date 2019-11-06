@@ -24,26 +24,14 @@
   }
 }
 
+.button-with-icon {
+  display: flex;
+  justify-content: space-between;
+}
+
 .button {
   &.small {
     @extend %generic-btn;
-  }
-
-  &.back {
-    background-color: #f6f9fc;
-    width: 32px;
-    height: 32px;
-    border: hidden;
-    outline: none;
-  }
-
-  &.disabled {
-    width: 122px;
-    height: 40px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: not-allowed;
-    opacity: 0.8;
   }
 
   &.regular {

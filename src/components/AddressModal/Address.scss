@@ -1,0 +1,47 @@
+.address-modal {
+  background-color: #ffffff;
+  width: 640px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.15);
+
+  &__header {
+    width: 361px;
+    height: 28px;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 28px;
+    color: #3359db;
+  }
+
+  &__footer {
+    display: flex;
+    flex-basis: 100%;
+    justify-content: flex-start;
+    margin-top: 20px;
+
+    &__item {
+      margin-right: 21px;
+    }
+  }
+
+  &__input-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  &__form-field {
+    width: 48%;
+    :focus {
+      border: 2px solid #3359db;
+      outline: none;
+    }
+  }
+}
+
+.input-box {
+  margin: 10px 0px;
+  :focus {
+    border: 2px solid #3359db;
+    outline: none;
+  }
+}

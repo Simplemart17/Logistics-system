@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
 import Input from '../../components/InputField/index';
 import Button from '../../components/Button/index';
 import { loginAction } from '../../store/auth/index';
@@ -12,20 +13,10 @@ const Login = props => {
     identifier: '',
     password: '',
   });
-  
-  /**
-   * Hooks to manage and set form error state
-   */
-  const [formError] = useState({
-    idetifierError: '',
-    passwordError: '',
-  });
 
   const handleChange = e => {
-    const { name, value } = e.target
-    setLoginForm({
-      [name]: value,
-    })
+    const { name, value } = e.target;
+    setLoginForm({ ...loginForm, [name]: value });
   }
 
   /**
@@ -53,27 +44,30 @@ const Login = props => {
         name="identifier"
         onChange={handleChange}
         value={loginForm.value}
-        error={formError.idetifierError}
         className="registration-form__field"
-        showTextOnError={true}
       />
       <Input
         placeholder="Password"
-        name="assword"
+        name="password"
         type="password"
         onChange={handleChange}
         value={loginForm.value}
-        error={formError.passwordError}
         className="registration-form__field"
-        showTextOnError={true}
       />
-      <Button
-        name="Login"
-        type="submit"
-        isActive
-        onClick={handleSubmit}
-        isLoading={props.isLoading}
-      />
+      <p className="registration-form__text">Yet to have an account?
+        <Link className="registration-form__text--span" to="/register">
+          <span>Register</span>
+        </Link>
+      </p>
+      <div className="registration-form__button">
+        <Button
+          name="Login"
+          type="submit"
+          isActive
+          onClick={handleSubmit}
+          isLoading={props.isLoading}
+        />
+      </div>
     </div>
   )
 
