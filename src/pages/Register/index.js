@@ -2,11 +2,11 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { registerAction } from '../../store/auth/index';
-import RegisterForm from '../../components/RegisterForm/index';
+import { registerAction } from 'store/auth/index';
+import RegisterForm from 'components/RegisterForm/index';
 import './Register.scss';
-import validationConfig from '../../utils/validationConfig';
-import applyValidation from '../../utils/applyValidation';
+import validationConfig from 'utils/validationConfig';
+import applyValidation from 'utils/applyValidation';
 
 
 const Register = props => {

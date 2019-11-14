@@ -1,6 +1,6 @@
 import React from 'react';
 import './InputField.scss';
-import classNameFormatter from '../../utils/classNameFormatter';
+import classNameFormatter from 'utils/classNameFormatter';
 
 const InputField = ({
   error,

@@ -2,7 +2,7 @@ import {
   REQUEST_ACTION,
   GET_COURIER_SUCCESS,
  } from './actionTypes';
-import axios from '../../utils/http';
+import axios from 'utils/http';
 
 export const requestAction = () => ({
   type: REQUEST_ACTION,

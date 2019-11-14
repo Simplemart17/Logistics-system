@@ -5,7 +5,7 @@ import {
   EDIT_ADDRESS_SUCCESS,
   DELETE_ADDRESS_SUCCESS,
  } from './actionTypes';
-import axios from '../../utils/http';
+import axios from 'utils/http';
 
 export const requestAction = () => ({
   type: REQUEST_ACTION,

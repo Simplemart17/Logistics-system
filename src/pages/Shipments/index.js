@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Dashboard from '../Dashboard/index';
 import './Shipments.scss';
-import { getShipmentAction } from '../../store/shipments/index';
-import { getUserProfile } from '../../store/auth/index';
-import Button from '../../components/Button/index';
-import Spinner from '../../components/Spinner/index';
+import { getShipmentAction } from 'store/shipments/index';
+import { getUserProfile } from 'store/auth/index';
+import Button from 'components/Button/index';
+import Spinner from 'components/Spinner/index';
 
 const Shipments = (props) => {
   const { profile, userDetails, shipments, getShipments, isLoading } = props;

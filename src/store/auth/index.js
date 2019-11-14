@@ -7,8 +7,8 @@ import {
   GET_USER_SUCCESS,
   LOG_USER_OUT
  } from './actionTypes';
-import axios from '../../utils/http';
-import { setLocalStorage } from '../../utils/auth';
+import axios from 'utils/http';
+import { setLocalStorage } from 'utils/auth';
 
 export const registerUser = register => ({
   type: REGISTER_SUCCESS,
