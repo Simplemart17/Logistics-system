@@ -1,6 +1,5 @@
 %generic-btn {
   background-color: #ffffff;
-  width: 78px;
   height: 28px;
   border: 1px solid #3359db;
   border-radius: 2px;
@@ -32,6 +31,11 @@
 .button {
   &.small {
     @extend %generic-btn;
+
+    &.active {
+      background-color: #3359db;
+      color: #ffffff;
+    }
   }
 
   &.regular {
@@ -51,7 +55,6 @@
       font-weight: 300;
     }
 
-    &.blue,
     &.active {
       background-color: #3359db;
       color: #ffffff;

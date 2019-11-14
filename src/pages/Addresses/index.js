@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import Dashboard from '../Dashboard/index';
 import './Addresses.scss';
-import { getAddressAction, createAddressAction } from '../../store/addresses/index';
+import {
+  getAddressAction,
+  createAddressAction,
+  editAddressAction } from '../../store/addresses/index';
 import { getUserProfile } from '../../store/auth/index';
 import Button from '../../components/Button/index';
 import AddressModal from '../../components/AddressModal/index';
@@ -20,6 +24,7 @@ const Addresses = (props) => {
     state: '',
     friendly_name: '',
   });
+  const [currentAddress, setCurrentAddress] = useState({});
   const userId = userDetails.id;
 
   useEffect(() => {
@@ -79,8 +84,28 @@ const Addresses = (props) => {
           <div className='address-card'>
           { isLoading ? <Spinner /> 
           : addresses.map(address => (
-              <div key={address.id} className='address-card__box' onClick={toggleModal('showAddressModal view')}>
-                <h4>City: {address.city}</h4>
+              <div key={address.id} className='address-card__box'>
+                <div className='address-card__box--header'>
+                  <p>Country - {address.country}</p>
+                </div>
+                <p className='address-card__box--sub_header'>City - <span>{address.city}</span></p>
+                <div className='address-card__box--button'>
+                  <div className='address-card__box--button_item'>
+                    <Button
+                      name='VIEW'
+                      size='small'
+                      onClick={() => {setCurrentAddress(address); toggleModal('showAddressModal view')()}}
+                    />
+                  </div>
+                  <div className='address-card__box--button_item'>
+                    <Button
+                      name='EDIT'
+                      size='small'
+                      isActive
+                      onClick={editAddress}
+                    />
+                  </div>
+                </div>
               </div>
             ))
           }
@@ -104,6 +129,15 @@ const Addresses = (props) => {
     toggleModal('showAddressModal')()
   }
 
+  /**
+   * @This method sets the state for edit modal
+   *
+   * @returns {void}
+   */
+  const editAddress = () => {
+    toggleModal('showAddressModal edit')()
+  }
+
   const renderAddressModal = () => {
     return(
       <AddressModal
@@ -113,6 +147,13 @@ const Addresses = (props) => {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         isLoading={isLoading}
+        city={currentAddress.city}
+        country={currentAddress.country}
+        email={currentAddress.email}
+        street={currentAddress.street}
+        state={currentAddress.state}
+        timeStamp={moment(currentAddress.created_at).format('LLLL')}
+        friendlyName={currentAddress.friendly_name}
       />
     )
   }
@@ -126,16 +167,18 @@ const Addresses = (props) => {
   )
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+  return({
   userDetails: state.auth.data,
   addresses: state.addresses.data,
   isLoading: state.auth.isLoading
-});
+})};
 
 const mapDispatchToProps = dispatch => ({
   profile: () => dispatch(getUserProfile()),
   getAddresses: (id) => dispatch(getAddressAction(id)),
   createAddress: payload => dispatch(createAddressAction(payload)),
+  updateAddress: payload => dispatch(editAddressAction(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Addresses);

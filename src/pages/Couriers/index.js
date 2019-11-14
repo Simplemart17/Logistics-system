@@ -27,7 +27,10 @@ const Couriers = (props) => {
           { isLoading ? <Spinner /> 
           : couriers.map(courier => (
               <div key={courier.id} className='courier-card__box'>
-                <h4>City: {courier.name}</h4>
+                <div className='courier-card__box--header'>
+                  <p>Name: {courier.name}</p>
+                </div>
+                <p className='courier-card__box--sub_header'>Email: <span>{courier.email}</span></p>
               </div>
             ))
           }

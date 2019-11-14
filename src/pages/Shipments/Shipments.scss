@@ -26,19 +26,39 @@
 
 .shipment-card {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   
   grid-column-gap: 10px;
   grid-row-gap: 15px;
   :hover {
-    opacity: 0.8;
+    opacity: 0.9;
   }
   
   &__box {
     border: 2px solid #f4f4f4;
     border-radius: 6px;
     box-shadow: 2px 3px #31a7ca;
-    padding-left: 10px;
+    padding: 30px;
     background: #d9e0f5;
+    cursor: pointer;
+
+    &--header {
+      color: #39393a;
+      font-size: 18px;
+      font-weight: 500;
+
+      h4 {
+        margin: 0;
+      }
+    }
+
+    &--sub_header {
+      padding: 0;
+      color: #292c33;
+
+      span {
+        text-transform: capitalize;
+      }
+    }
   }
 }
