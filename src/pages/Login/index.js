@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
-import Input from '../../components/InputField/index';
-import Button from '../../components/Button/index';
-import { loginAction } from '../../store/auth/index';
+import Input from 'components/InputField/index';
+import Button from 'components/Button/index';
+import { loginAction } from 'store/auth/index';
 
 const Login = ({ login, history, isLoading }) => {
   /**

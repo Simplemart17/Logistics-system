@@ -6,11 +6,11 @@ import './Addresses.scss';
 import {
   getAddressAction,
   createAddressAction,
-  editAddressAction } from '../../store/addresses/index';
-import { getUserProfile } from '../../store/auth/index';
-import Button from '../../components/Button/index';
-import AddressModal from '../../components/AddressModal/index';
-import Spinner from '../../components/Spinner/index';
+  editAddressAction } from 'store/addresses/index';
+import { getUserProfile } from 'store/auth/index';
+import Button from 'components/Button/index';
+import AddressModal from 'components/AddressModal/index';
+import Spinner from 'components/Spinner/index';
 
 const Addresses = (props) => {
   const { profile, userDetails, createAddress, getAddresses, addresses, isLoading } = props;

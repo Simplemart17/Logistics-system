@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Dashboard from '../Dashboard/index';
 import './Couriers.scss';
-import { getCourierAction } from '../../store/couriers/index';
-import Spinner from '../../components/Spinner/index';
+import { getCourierAction } from 'store/couriers/index';
+import Spinner from 'components/Spinner/index';
 
 const Couriers = (props) => {
   const { getCourier, couriers, isLoading } = props;

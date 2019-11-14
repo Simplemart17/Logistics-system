@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import SideBar from '../../components/SideBar/index';
-import { getUserProfile, logOutAction } from '../../store/auth/index';
+import SideBar from 'components/SideBar/index';
+import { getUserProfile, logOutAction } from 'store/auth/index';
 
 const Dashboard = (props) => {
   const { profile, userDetails, logOut } = props;
