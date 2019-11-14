@@ -1,146 +1,30 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import SideBar from '../../components/SideBar/index';
-import './Dashboard.scss';
-import { getUserProfile } from '../../store/auth/index';
-import { getAddressAction, createAddressAction } from '../../store/addresses/index';
-import Button from '../../components/Button/index';
-import AddressModal from '../../components/AddressModal/index';
+import { getUserProfile, logOutAction } from '../../store/auth/index';
 
-const Dashboard = ({ profile, userDetails, createAddress, getAddresses, addresses, history }) => {
-  const [state, setState] = useState({
-    addressModalAction: 'view',
-    showAddressModal: false,
-    street: '',
-    email: '',
-    country: '',
-    city: '',
-    friendly_name: '',
-  });
+const Dashboard = (props) => {
+  const { profile, userDetails, logOut } = props;
 
-  useEffect(() => {
-    profile();
-    getAddresses();
-  }, [profile, getAddresses]);
-
- 
-  /**
-   * This method open modal based on action to be performed
-   * @param {String} modalName 
-   * @returns {JSX}
-   */
-  const toggleModal = (modalName) => () => {
-    switch (modalName.includes(modalName)) {
-      case modalName.includes('view'):
-        setState({
-          addressModalAction: 'view',
-          showAddressModal: !state.showAddressModal,
-        });
-        break;
-      case modalName.includes('edit'):
-        setState({
-          addressModalAction: 'edit',
-          showAddressModal: !state.showAddressModal,
-        });
-        break;
-      case modalName.includes('create'):
-        setState({
-          addressModalAction: 'create',
-          showAddressModal: !state.showAddressModal,
-        });
-        break;
-      default:
-        setState({ [modalName]: !state[modalName] });
-    }
-  }
- 
-  /**
-   * This method render the card for address
-   */
-  const addressCard = () => {
-    return(
-      <div className='address-wrapper'>
-        <h1 className='address-wrapper__header'>
-          Addresses
-        </h1>
-        <div className='address-wrapper__button'>
-          <Button
-            name="Add New"
-            isActive
-            icon="https://res.cloudinary.com/dq7p8ff2f/image/upload/v1572984667/Assets/plus-icon.png"
-            onClick={toggleModal('showAddressModal create')}
-          />
-        </div>
-        <div className='address-card-wrapper'>
-          <h1>List of Addresses</h1>
-          <div className='address-card'>
-          {
-            addresses.map((address) => (
-              <div key={address.id} className='address-card__box' onClick={toggleModal('showAddressModal view')}>
-                <p>{address.city}</p>
-              </div>
-            ))
-          }
-          </div>
-        </div>
-      </div>
-    )
-  };
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-    console.log(name, value, state)
-    setState(() => ({ ...state, [name]: value }));
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const {  street, email, city, country, friendly_name } = state;
-    const payload = { street, email, city, country, friendly_name };
-    
-    await createAddress(payload);
-    toggleModal('showAddressModal')()
-  }
-
-  const logOut = () => {
-    localStorage.removeItem('token');
-    history.push('/');
-  }
-
-  const renderAddressModal = () => {
-    return(
-      <AddressModal
-        showModal={state.showAddressModal}
-        toggleModal={toggleModal('showAddressModal')}
-        modalAction={state.addressModalAction}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-      />
-    )
-  }
+  useEffect(() => { profile(); }, [profile]);
 
   return(
-    <div className='dashboard-container'>
-      <SideBar
-        username={userDetails.username}
-        email={userDetails.email}
-        logOutUser={() => logOut()}
-      />
-      {addressCard()}
-      {renderAddressModal()}
-    </div>
+    <SideBar
+      username={userDetails.username}
+      email={userDetails.email}
+      logOutUser={() => logOut()}
+    />
   )
 };
 
 const mapStateToProps = state => ({
   userDetails: state.auth.data,
-  addresses: state.addresses.data
 });
 
 const mapDispatchToProps = dispatch => ({
   profile: () => dispatch(getUserProfile()),
-  getAddresses: () => dispatch(getAddressAction()),
-  createAddress: payload => dispatch(createAddressAction(payload)),
+  logOut: () => dispatch(logOutAction())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Dashboard));

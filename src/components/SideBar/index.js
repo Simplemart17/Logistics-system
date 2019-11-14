@@ -15,7 +15,7 @@ const SideBar = props => (
     <div className='sidebar__menu'>
       <ul className='sidebar__menu--content'>
         <li>
-          <Link to='/dashboard' className='sidebar__menu--link'>
+          <Link to='/addresses' className='sidebar__menu--link'>
             <img src="https://res.cloudinary.com/dq7p8ff2f/image/upload/v1572969948/Assets/address-icon.png" alt="address" />
             Addresses
           </Link>

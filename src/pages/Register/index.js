@@ -82,7 +82,7 @@ const Register = props => {
     if (!hasNoError) { return; }
     
     await register(payload);
-    history.push('/dashboard');
+    history.push('/addresses');
   }
 
   const {  usernameError, emailError, passwordError, phoneError } = form;

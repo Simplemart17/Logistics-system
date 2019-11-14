@@ -1,10 +1,10 @@
 /* eslint-disable default-case */
 import React from 'react';
-import './Address.scss';
+import './AddressModal.scss';
 import Button from '../Button/index';
 import InputField from '../InputField/index';
 import Modal from '../Modal/index';
-import { inputList, inputGroup } from './fixture';
+import { inputGroup } from './fixture';
 
 
 /**
@@ -20,23 +20,11 @@ const renderViewAddressDetails = () => (
 /**
  * This method renders the edit address modal
  *
- * @param {Object}
+ * @param {Object} props
  *
  * @returns {jsx}
  */
 const renderEditAddress = (props) => (
-  <div className='address-modal__content'>
-    <div className='address-modal__form-group'>
-      <InputField
-        autoFocus
-        placeholder="Enter Street"
-        disabled={false}
-        onChange={props.handleChange}
-        value={props.value}
-        name="street"
-        className="input-box"
-      />
-    </div>
     <div className='address-modal__input-group'>
       {inputGroup.map((data, index) => (
         <div className='address-modal__form-field' key={index}>
@@ -50,23 +38,7 @@ const renderEditAddress = (props) => (
           />
         </div>
       )
-      )}
-    </div>
-    <div className='address-modal__input-group'>
-      {inputList.map((data, index) => (
-        <div className='address-modal__form-field' key={index}>
-          <InputField
-            autoFocus
-            placeholder={data.placeholder}
-            disabled={false}
-            onChange={props.handleChange}
-            value={props.value}
-            name={data.name}
-          />
-        </div>
-      )
-      )}
-    </div>
+    )}
   </div>
 );
 
@@ -117,7 +89,7 @@ const renderModalContent =
  *
  * @returns {Function}
  */
-const renderModalFooter = (modalAction, toggleModal, handleSubmit) => () => (
+const renderModalFooter = (modalAction, toggleModal, handleSubmit, isLoading) => () => (
   <div className='address-modal__footer'>
     {modalAction === 'view' ? (
       <div className='address-modal__footer__item'>
@@ -142,6 +114,7 @@ const renderModalFooter = (modalAction, toggleModal, handleSubmit) => () => (
               type="button"
               isActive
               onClick={handleSubmit}
+              isLoading={isLoading}
             />
           </div>
         </>
@@ -150,8 +123,12 @@ const renderModalFooter = (modalAction, toggleModal, handleSubmit) => () => (
 );
 
 const AddressModal = (props) => {
-  const { modalAction, showModal, toggleModal, handleSubmit, handleChange, value, viewAddressDetails } = props;
+  const { modalAction, showModal, toggleModal, handleSubmit, handleChange, value, isLoading, view } = props;
 
+  const viewAddressDetails = {
+    view,
+  };
+  
   const addressModalContent = {
     value,
     handleChange,
@@ -162,7 +139,7 @@ const AddressModal = (props) => {
       showModal={showModal}
       renderContent={renderModalContent(modalAction, viewAddressDetails, addressModalContent)}
       renderHeader={renderModalHeader(modalAction)}
-      renderFooter={renderModalFooter(modalAction, toggleModal, handleSubmit)}
+      renderFooter={renderModalFooter(modalAction, toggleModal, handleSubmit, isLoading)}
     />
   );
 };
