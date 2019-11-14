@@ -24,24 +24,16 @@
   }
 
   &__input-group {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
   &__form-field {
-    width: 48%;
+    width: 95%;
+    padding-top: 10px;
     :focus {
       border: 2px solid #3359db;
       outline: none;
     }
-  }
-}
-
-.input-box {
-  margin: 10px 0px;
-  :focus {
-    border: 2px solid #3359db;
-    outline: none;
   }
 }

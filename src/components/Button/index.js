@@ -9,7 +9,6 @@ const Button = (props) => {
     isActive,
     submit = false,
     classes,
-    ...rest
   } = props;
   type = !type ? 'hollow' : type;
   size = !size ? 'regular' : size;
@@ -53,7 +52,6 @@ const Button = (props) => {
 
   return (
     <button
-      { ...rest }
       type={submit ? 'submit' : 'button'}
       id={props.id}
       className={classList}

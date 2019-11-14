@@ -1,9 +1,9 @@
 import {
   REQUEST_ACTION,
-  GET_ADDRESS_SUCCESS,
-  CREATE_ADDRESS_SUCCESS,
-  EDIT_ADDRESS_SUCCESS,
-  DELETE_ADDRESS_SUCCESS,
+  GET_SHIPMENT_SUCCESS,
+  CREATE_SHIPMENT_SUCCESS,
+  EDIT_SHIPMENT_SUCCESS,
+  DELETE_SHIPMENT_SUCCESS,
  } from './actionTypes';
 import axios from '../../utils/http';
 
@@ -11,61 +11,61 @@ export const requestAction = () => ({
   type: REQUEST_ACTION,
 });
 
-export const getAddress = payload => ({
-  type: GET_ADDRESS_SUCCESS,
+export const getShipment = payload => ({
+  type: GET_SHIPMENT_SUCCESS,
   payload,
 });
 
-export const createAddress = payload => ({
-  type: CREATE_ADDRESS_SUCCESS,
+export const createShipment = payload => ({
+  type: CREATE_SHIPMENT_SUCCESS,
   payload,
 });
 
-export const editAddress = payload => ({
-  type: EDIT_ADDRESS_SUCCESS,
+export const editShipment = payload => ({
+  type: EDIT_SHIPMENT_SUCCESS,
   payload,
 });
 
-export const deleteAddress = payload => ({
-  type: DELETE_ADDRESS_SUCCESS,
+export const deleteShipment = payload => ({
+  type: DELETE_SHIPMENT_SUCCESS,
   payload,
 });
 
-export const getAddressAction = id => async dispatch => {
+export const getShipmentAction = id => async dispatch => {
   dispatch(requestAction());
   try {
-    const { data } = await axios.get(`/addresses?user=${id}`);
-    dispatch(getAddress(data));
+    const { data } = await axios.get(`/shipments?user=${id}`);
+    dispatch(getShipment(data));
   } catch (error) {
     console.log(error.message);
   }
 };
 
-export const createAddressAction = payload => async dispatch => {
+export const createShipmentAction = payload => async dispatch => {
   dispatch(requestAction());
   try {
-    const { data } = await axios.post('/addresses', payload);
-    dispatch(createAddress(data));
+    const { data } = await axios.post('/shipments', payload);
+    dispatch(createShipment(data));
   } catch (error) {
     console.log(error.message);
   }
 };
 
-export const editAddressAction = (payload, id) => async dispatch => {
+export const editShipmentAction = payload => async dispatch => {
   dispatch(requestAction());
   try {
-    const data = await axios.patch('/addresses', payload);
-    dispatch(editAddress(data));
+    const data = await axios.patch('/shipments', payload);
+    dispatch(editShipment(data));
   } catch (error) {
     console.log(error.message);
   }
 };
 
-export const deleteAddressAction = id => async dispatch => {
+export const deleteShipmentAction = () => async dispatch => {
   dispatch(requestAction());
   try {
-    const data = await axios.delete('/addresses');
-    dispatch(deleteAddress(data));
+    const data = await axios.delete('/shipments');
+    dispatch(deleteShipment(data));
   } catch (error) {
     console.log(error.message);
   }
@@ -83,25 +83,25 @@ const reducer = (state = initialState, action) => {
         ...state,
         isLoading: true
       };
-    case GET_ADDRESS_SUCCESS:
+    case GET_SHIPMENT_SUCCESS:
       return {
         ...state,
         data: action.payload,
         isLoading: false
       };
-    case CREATE_ADDRESS_SUCCESS:
+    case CREATE_SHIPMENT_SUCCESS:
       return {
         ...state,
         data: action.payload,
         isLoading: false
       };
-    case EDIT_ADDRESS_SUCCESS:
+    case EDIT_SHIPMENT_SUCCESS:
       return {
         ...state,
         data: action.payload,
         isLoading: false
       };
-    case DELETE_ADDRESS_SUCCESS:
+    case DELETE_SHIPMENT_SUCCESS:
       return {
         ...state,
         data: action.payload,

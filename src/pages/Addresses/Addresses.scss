@@ -8,7 +8,7 @@
 
 .address-wrapper {
   padding: 20px 40px 0px 30px;
-
+  
   &__header {
     color: #7f9af5;
     border-bottom: 2px solid #4c00ff;
@@ -22,8 +22,11 @@
 }
 
 .address-card-wrapper {
+  background: #f4f5f7;
+  height: 80vh;
   margin-top: 100px;
-  padding: 10px;
+  padding: 15px;
+  box-shadow: 1px 5px 16px 0 rgba(0, 0, 0, 0.19);
   h1 {
     color: #7f9af5;
   }
@@ -31,7 +34,7 @@
 
 .address-card {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   
   grid-column-gap: 10px;
   grid-row-gap: 15px;
@@ -45,6 +48,6 @@
     box-shadow: 2px 3px;
     padding-left: 10px;
     cursor: pointer;
-    background: rgb(217, 224, 245);
+    background: #d9e0f5;
   }
 }

@@ -5,7 +5,7 @@ import Input from '../../components/InputField/index';
 import Button from '../../components/Button/index';
 import { loginAction } from '../../store/auth/index';
 
-const Login = props => {
+const Login = ({ login, history, isLoading }) => {
   /**
    * Hooks to manage form state
    */
@@ -26,12 +26,14 @@ const Login = props => {
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { login, history } = props;
     const {  identifier, password } = loginForm;
     const payload = { identifier, password };
-    await login(payload);
+    const success = await login(payload);
+    const loginError = success.payload.error;
+
+    if (loginError) return;
     
-    history.push('/dashboard');
+    history.push('/addresses');
   }
   
   /**
@@ -65,7 +67,7 @@ const Login = props => {
           type="submit"
           isActive
           onClick={handleSubmit}
-          isLoading={props.isLoading}
+          isLoading={isLoading}
         />
       </div>
     </div>
@@ -82,7 +84,7 @@ const Login = props => {
 }
 
 const mapStateToProps = state => ({
-  isLoading: state.auth.isLoading
+  isLoading: state.auth.isLoading,
 });
 const mapDispatchToProps = dispatch => ({
   login: payload => dispatch(loginAction(payload)),
