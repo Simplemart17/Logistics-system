@@ -39,7 +39,18 @@ const Shipments = (props) => {
           : shipments.length === 0 ? <h4>No Records Found!</h4>
           : shipments.map(shipment => (
               <div key={shipment.id} className='shipment-card__box'>
-                <h4>City: {shipment.origin.name}</h4>
+                <div className='shipment-card__box--header'>
+                  <h4>Origin</h4>
+                  <p className='shipment-card__box--sub_header'>Address: <span>{shipment.origin.street}</span></p>
+                </div>
+                <div className='shipment-card__box--header'>
+                  <h4>Destination</h4>
+                  <p className='shipment-card__box--sub_header'>Address: <span>{shipment.destination.street}</span></p>
+                </div>
+                <div className='shipment-card__box--header'>
+                  <h4>Courier</h4>
+                  <p className='shipment-card__box--sub_header'>Name: <span>{shipment.courier.name}</span></p>
+                </div>
               </div>
             ))
           }
@@ -57,13 +68,11 @@ const Shipments = (props) => {
   )
 }
 
-const mapStateToProps = state => {
-  console.log(state, 'component state...')
-return({
+const mapStateToProps = state => ({
   userDetails: state.auth.data,
   shipments: state.shipments.data,
   isLoading: state.auth.isLoading
-})};
+});
 
 const mapDispatchToProps = dispatch => ({
   profile: () => dispatch(getUserProfile()),

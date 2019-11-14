@@ -51,7 +51,7 @@ export const createAddressAction = payload => async dispatch => {
   }
 };
 
-export const editAddressAction = (payload, id) => async dispatch => {
+export const editAddressAction = payload => async dispatch => {
   dispatch(requestAction());
   try {
     const data = await axios.patch('/addresses', payload);
@@ -61,7 +61,7 @@ export const editAddressAction = (payload, id) => async dispatch => {
   }
 };
 
-export const deleteAddressAction = id => async dispatch => {
+export const deleteAddressAction = () => async dispatch => {
   dispatch(requestAction());
   try {
     const data = await axios.delete('/addresses');

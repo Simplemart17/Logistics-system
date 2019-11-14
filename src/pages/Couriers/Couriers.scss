@@ -21,20 +21,32 @@
 
 .courier-card {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   
   grid-column-gap: 10px;
   grid-row-gap: 15px;
-  :hover {
-    opacity: 0.8;
-  }
   
   &__box {
     border: 2px solid #f4f4f4;
-    border-radius: 6px;
+    border-radius: 2px;
     box-shadow: 2px 3px #434ef1;
-    padding-left: 10px;
+    padding-left: 20px;
     background: #d9e0f5;
-    text-align: center;
+
+    &--header {
+      color: #39393a;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    &--sub_header {
+      padding: 0;
+      color: #292c33;
+
+      span {
+        text-decoration: underline;
+        color: blue;
+      }
+    }
   }
 }
